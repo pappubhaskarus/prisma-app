@@ -3,7 +3,7 @@ import TodoFormServerComponent from "@/components/research/TodoFormServerCompone
 import TodoItemServerComponent from "@/components/research/TodoItemServerComponent";
 
 const Page = async () => {
-  const { todos, page, limit, totalPages, total } = await getTodos();
+  const { todos, total } = await getTodos();
 
   return (
     <div className="container mx-auto max-w-md p-4">
