@@ -18,7 +18,7 @@ function DomainSwitcher() {
       }}
     >
       {Object.values(EDomainType).map((d) => {
-        return <option value={d}>{d}</option>;
+        return <option key={d} value={d}>{d}</option>;
       })}
     </select>
   );

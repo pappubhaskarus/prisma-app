@@ -1,7 +1,5 @@
-import Link from "next/link";
 import React from "react";
 import { getServerSession } from "next-auth";
-import LogoutButton from "../../auth/LogoutButton";
 
 async function BakeriesHeader() {
   const session = await getServerSession();

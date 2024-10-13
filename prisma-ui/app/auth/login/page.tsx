@@ -47,7 +47,7 @@ function LoginPage() {
         setConfig(BakeriesConfig);
     }
     console.table(currentDomainType);
-  }, []);
+  }, [currentDomainType]);
 
   if (sessionStatus === "loading") {
     return (
