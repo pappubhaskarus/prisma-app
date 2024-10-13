@@ -1,18 +1,13 @@
 "use client";
-
-import "./page.css";
 import React, { useEffect, useState } from "react";
-import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { get } from "local-storage";
+import { useSession } from "next-auth/react";
 import DivAnimation from "@/components/animation/DivAnimation";
+import { IConfig } from "../login/page";
+import { get } from "local-storage";
 import Social from "@/components/auth/Social";
 import Divider from "@/components/auth/Divider";
-import LoginForm from "@/components/auth/LoginForm";
-export interface IConfig {
-  heading: string;
-  body: string;
-}
+import RegisterForm from "@/components/auth/RegisterForm";
 const BlogConfig: IConfig = {
   heading: "Welcome Back to the Hub of Ideas That Matter",
   body: "Ready to dive deeper into stories that spark inspiration and conversations that challenge the norm? Sign in to continue your journey. Your next dose of insight is just a click away.",
@@ -25,12 +20,13 @@ const BakeriesConfig: IConfig = {
   heading: "Welcome Back to the Sweetest Corner of Baking",
   body: "Ready to indulge in delightful recipes and mouthwatering creations? Sign in to explore our latest cake designs, baking tips, and inspiration that will elevate your baking game. Your next delicious masterpiece is just a click away!",
 };
-function LoginPage() {
-  const [config, setConfig] = useState<IConfig>();
-  const { data: session, status: sessionStatus } = useSession();
+
+const RegisterPage = () => {
   const router = useRouter();
+  const { data: session, status: sessionStatus } = useSession();
+  const [config, setConfig] = useState<IConfig>();
+
   useEffect(() => {
-    console.log(sessionStatus);
     if (sessionStatus === "authenticated") {
       router.replace("/dashboard/user");
     }
@@ -59,8 +55,6 @@ function LoginPage() {
     );
   }
 
-
-
   return (
     sessionStatus !== "authenticated" && (
       <div className="hero  min-h-screen">
@@ -72,7 +66,7 @@ function LoginPage() {
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
-              <LoginForm />
+              <RegisterForm />
               <Divider />
               <Social />
             </div>
@@ -81,6 +75,6 @@ function LoginPage() {
       </div>
     )
   );
-}
+};
 
-export default LoginPage;
+export default RegisterPage;
