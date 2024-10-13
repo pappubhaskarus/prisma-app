@@ -1,6 +1,6 @@
 import React from "react";
 import toast from "react-hot-toast";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 function LoginForm() {
@@ -11,7 +11,10 @@ function LoginForm() {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; target: { value: any; }[]; }) => {
+  const handleSubmit = async (e: {
+    preventDefault: () => void;
+    target: { value }[];
+  }) => {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;

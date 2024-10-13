@@ -16,7 +16,10 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any) {
+      async authorize(credentials) {
+        if (!credentials || !credentials?.email || !credentials.password) {
+          return null;
+        }
         try {
           const user = await User.findOne({ email: credentials.email });
           if (user) {
@@ -28,8 +31,9 @@ export const authOptions: AuthOptions = {
               return user;
             }
           }
-        } catch (e) {
-          throw new Error(e);
+        } catch (e: unknown) {
+          console.error(e);
+          throw new Error();
         }
       },
     }),
@@ -61,8 +65,8 @@ export const authOptions: AuthOptions = {
             return true;
           }
           return true;
-        } catch (err) {
-          console.log("Error saving user", err);
+        } catch (e: unknown) {
+          console.error(e);
           return false;
         }
       }

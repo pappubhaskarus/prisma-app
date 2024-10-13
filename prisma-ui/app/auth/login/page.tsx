@@ -1,14 +1,14 @@
 "use client";
 
 import "./page.css";
-import React, { useEffect, useState } from "react";
-import { signIn, useSession } from "next-auth/react";
+import React, { useContext, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { get } from "local-storage";
 import DivAnimation from "@/components/animation/DivAnimation";
 import Social from "@/components/auth/Social";
 import Divider from "@/components/auth/Divider";
 import LoginForm from "@/components/auth/LoginForm";
+import { DomainContext } from "@/provider/DomainProvider";
 export interface IConfig {
   heading: string;
   body: string;
@@ -26,8 +26,9 @@ const BakeriesConfig: IConfig = {
   body: "Ready to indulge in delightful recipes and mouthwatering creations? Sign in to explore our latest cake designs, baking tips, and inspiration that will elevate your baking game. Your next delicious masterpiece is just a click away!",
 };
 function LoginPage() {
+  const { currentDomainType } = useContext(DomainContext);
   const [config, setConfig] = useState<IConfig>();
-  const { data: session, status: sessionStatus } = useSession();
+  const { status: sessionStatus } = useSession();
   const router = useRouter();
   useEffect(() => {
     console.log(sessionStatus);
@@ -37,8 +38,7 @@ function LoginPage() {
   }, [sessionStatus, router]);
 
   useEffect(() => {
-    const domainType = get<string>("NEXT_PUBLIC_DOMAIN_TYPE");
-    switch (domainType) {
+    switch (currentDomainType) {
       case "blog":
         setConfig(BlogConfig);
       case "edtech":
@@ -46,7 +46,7 @@ function LoginPage() {
       case "bakeries":
         setConfig(BakeriesConfig);
     }
-    console.table(domainType);
+    console.table(currentDomainType);
   }, []);
 
   if (sessionStatus === "loading") {
@@ -58,8 +58,6 @@ function LoginPage() {
       </div>
     );
   }
-
-
 
   return (
     sessionStatus !== "authenticated" && (

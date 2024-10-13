@@ -24,7 +24,8 @@ export default function TodoForm() {
       try {
         // call server action
         await createTodoAction({ title, path: "/with-client-actions" });
-      } catch (e) {
+      } catch (err: unknown) {
+        console.log(err);
         setError("Failed to create todo");
       }
     });

@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import DivAnimation from "@/components/animation/DivAnimation";
 import { IConfig } from "../login/page";
-import { get } from "local-storage";
 import Social from "@/components/auth/Social";
 import Divider from "@/components/auth/Divider";
 import RegisterForm from "@/components/auth/RegisterForm";
+import { DomainContext } from "@/provider/DomainProvider";
 const BlogConfig: IConfig = {
   heading: "Welcome Back to the Hub of Ideas That Matter",
   body: "Ready to dive deeper into stories that spark inspiration and conversations that challenge the norm? Sign in to continue your journey. Your next dose of insight is just a click away.",
@@ -22,8 +22,9 @@ const BakeriesConfig: IConfig = {
 };
 
 const RegisterPage = () => {
+  const { currentDomainType } = useContext(DomainContext);
   const router = useRouter();
-  const { data: session, status: sessionStatus } = useSession();
+  const { status: sessionStatus } = useSession();
   const [config, setConfig] = useState<IConfig>();
 
   useEffect(() => {
@@ -33,8 +34,7 @@ const RegisterPage = () => {
   }, [sessionStatus, router]);
 
   useEffect(() => {
-    const domainType = get<string>("NEXT_PUBLIC_DOMAIN_TYPE");
-    switch (domainType) {
+    switch (currentDomainType) {
       case "blog":
         setConfig(BlogConfig);
       case "edtech":
@@ -42,7 +42,7 @@ const RegisterPage = () => {
       case "bakeries":
         setConfig(BakeriesConfig);
     }
-    console.table(domainType);
+    console.table(currentDomainType);
   }, []);
 
   if (sessionStatus === "loading") {

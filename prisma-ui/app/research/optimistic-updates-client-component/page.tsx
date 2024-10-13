@@ -3,7 +3,7 @@ import OptimisticTodoItemClientComponent from "@/components/research/OptimisticT
 import { getTodos } from "@/server/lib/todos_db";
 
 const Page = async () => {
-  const { todos, page, limit, totalPages, total } = await getTodos();
+  const { todos, total } = await getTodos();
 
 
   return (

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { getServerSession } from "next-auth";
+import LogoutButton from "../../auth/LogoutButton";
 
 async function BakeriesHeader() {
   const session = await getServerSession();
@@ -76,9 +77,7 @@ async function BakeriesHeader() {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link className="btn btn-primary" href="/auth/login">
-          Login
-        </Link>
+       Hi
       </div>
     </div>
   );

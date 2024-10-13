@@ -7,7 +7,7 @@ import DivAnimation from "@/components/animation/DivAnimation";
 
 function AdminPage() {
   const router = useRouter();
-  const { data: session, status: sessionStatus } = useSession();
+  const { status: sessionStatus } = useSession();
   useEffect(() => {
     console.log(sessionStatus);
     if (sessionStatus === "authenticated") {

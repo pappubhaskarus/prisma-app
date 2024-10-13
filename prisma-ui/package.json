@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
     "lint": "next lint",
-    "test" : "pnpm exec playwright test"
+    "test": "pnpm exec playwright test"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
     "bcryptjs": "^2.4.3",
     "framer-motion": "^11.11.8",
     "local-storage": "^2.0.0",
@@ -19,7 +20,8 @@
     "prisma-ui": "file:",
     "react": "^18",
     "react-dom": "^18",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",
