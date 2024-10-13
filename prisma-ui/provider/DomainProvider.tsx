@@ -1,11 +1,7 @@
 "use client";
 
+import { EDomainType } from "@/server/lib/loader";
 import React, { useState } from "react";
-export enum EDomainType {
-  Blog = "blog",
-  EdTech = "edtech",
-  Bakeries = "bakeries",
-}
 
 // Define the shape of the context data
 interface DomainContextType {

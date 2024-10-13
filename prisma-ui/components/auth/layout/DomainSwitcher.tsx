@@ -1,10 +1,7 @@
 "use client";
 
-import {
-  DomainContext,
-  EDomainType,
-  toEDomainType,
-} from "@/provider/DomainProvider";
+import { DomainContext, toEDomainType } from "@/provider/DomainProvider";
+import { EDomainType } from "@/server/lib/loader";
 import React, { useContext } from "react";
 
 function DomainSwitcher() {
@@ -18,7 +15,11 @@ function DomainSwitcher() {
       }}
     >
       {Object.values(EDomainType).map((d) => {
-        return <option key={d} value={d}>{d}</option>;
+        return (
+          <option key={d} value={d}>
+            {d}
+          </option>
+        );
       })}
     </select>
   );
