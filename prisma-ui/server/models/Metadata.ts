@@ -6,6 +6,12 @@ export interface IMetadata extends Document {
   type: string;
   value: string;
   parent: Schema.Types.ObjectId;
+  extras: [
+    {
+      name: string;
+      values: Schema.Types.Mixed;
+    }
+  ];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,6 +32,12 @@ const MetadataSchema: Schema<IMetadata> = new Schema(
       ref: "Metadata",
       required: false,
     },
+    extras: [
+      {
+        name: String,
+        values: Schema.Types.Mixed,
+      },
+    ],
   },
   {
     timestamps: true,
